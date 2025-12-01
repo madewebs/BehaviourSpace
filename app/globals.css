@@ -1,2 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+:root {
+  --font-exo: var(--font-exo);
+  --font-inter-tight: var(--font-inter-tight);
+  --font-edu-hand: var(--font-edu-hand);
+  --font-montserrat: var(--font-montserrat);
+  --font-raleway: var(--font-raleway);
+}
+
+.inter {
+  font-family: var(--font-inter-tight);
+}
+
+.exo {
+  font-family: var(--font-exo);
+}
+
+.mont {
+  font-family: var(--font-montserrat);
+}
+
+.raleway {
+  font-family: var(--font-raleway);
+}

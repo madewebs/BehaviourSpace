@@ -3,10 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Exo, Edu_AU_VIC_WA_NT_Hand } from "next/font/google"
-
-const exo = Exo({ subsets: ["latin"], weight: ["100", "200", "400", "700", "900"] });
-const eduHand = Edu_AU_VIC_WA_NT_Hand({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+import { exo, interTight, eduHand } from "@/app/fonts"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,52 +13,60 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-transparent fixed top-0 left-0 right-0 w-full px-4 py-6 md:py-4 z-50">
-      <div className="bg-[#E6F7F2] rounded-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex justify-between font-medium items-center h-16 ${exo.className}`}>
+    <nav className="bg-transparent fixed top-0 left-0 right-0 w-full px-4 py-6 md:py-8 z-50">
+      <div className="bg-[#ffffff] shadow-md rounded-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Option 1: Using Tailwind classes */}
+        <div className="flex justify-between items-center text-black/90 h-14 md:h-16">
           {/* Logo */}
           <div className="flex-shrink-1">
-            <Link href="/" className={`text-lg md:text-xl flex items-center space-x-2 font-medium ${eduHand.className}`}>
+            <Link href="/" className="text-lg md:text-xl flex items-center space-x-2 font-normal">
               <Image
                 width={50}
                 height={50}
                 alt="Logo"
                 src="/logo.png"
               />
-              <span className=''>BehaviourSpace</span>
+              {/* Option 2: Using imported font className */}
+              <span className='font-semibold text-[#016b70]'>BehaviourSpace</span>
             </Link>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex space-x-10">
-            <Link href="/" className="">
+          <div className="hidden lg:flex space-x-12 text-md font-medium raleway">
+            <Link href="/">
               Home
             </Link>
-            <Link href="/about" className="">
+            <Link href="/about" >
               About
             </Link>
-            <Link href="/services" className="">
-              Services
+            <Link href="/about" >
+              Blog
             </Link>
-            <Link href="/contact" className="">
-              Contact
+            <Link href="/about" >
+              Therapists
             </Link>
-            <Link href="/contact" className="">
+            <Link href="/contact">
               Contact
             </Link>
           </div>
 
-          <div className='hidden lg:flex'>
-            Book Now
-          </div>
+          {/* Option 3: Using eduHand font */}
+            <button
+              onClick={toggleMenu}
+              className="lg:inline-flex items-center justify-center p-2 rounded-md hidden"
+            >
+              Book Now
+              <span className='w-6 h-6 ml-1 rounded-full bg-[#000000]'>hi</span>
+            </button>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="hidden">
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md"
             >
-                X
+              Book Now
+              <span className='w-6 h-6 ml-1 rounded-full bg-[#000000]'>hi</span>
             </button>
           </div>
         </div>
