@@ -12,6 +12,8 @@ const config: Config = {
         "exo": ["var(--font-exo)"],
         "edu-hand": ["var(--font-edu-hand)"],
         "montserrat": ["var(--font-montserrat)"],
+        "raleway": ["var(--font-raleway)"],
+        "manrope": ["var(--font-manrope)"],
       }
     },
   },

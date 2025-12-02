@@ -7,6 +7,11 @@
   --font-edu-hand: var(--font-edu-hand);
   --font-montserrat: var(--font-montserrat);
   --font-raleway: var(--font-raleway);
+  --font-manrope: var(--font-manrope);
+}
+
+* {
+  font-family: var(--font-manrope);
 }
 
 .inter {
@@ -23,4 +28,8 @@
 
 .raleway {
   font-family: var(--font-raleway);
+}
+
+.manrope {
+  font-family: var(--font-manrope);
 }

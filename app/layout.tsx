@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { exo, interTight, eduHand, montserrat, raleway } from "./fonts";
+import { exo, interTight, eduHand, montserrat, raleway, manrope } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,6 +22,7 @@ export default function RootLayout({
         "--font-edu-hand": eduHand.style.fontFamily,
         "--font-montserrat": montserrat.style.fontFamily,
         "--font-raleway": raleway.style.fontFamily,
+        "--font-manrope": manrope.style.fontFamily,
       } as React.CSSProperties}
     >
       <body className={`${interTight.className} antialiased`}>{children}</body>

@@ -27,7 +27,7 @@ export default function Navbar() {
                 src="/logo.png"
               />
               {/* Option 2: Using imported font className */}
-              <span className='font-semibold text-[#016b70]'>BehaviourSpace</span>
+              <span className='font-semibold raleway text-[#016b70]'>BehaviourSpace</span>
             </Link>
           </div>
 

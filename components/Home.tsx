@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full h-full relative flex items-center justify-start">
+    <div className="min-h-[80vh] md:min-h-screen w-full h-full relative flex items-center justify-start">
         <Image
           src="/landing.jpg"
           alt="Description of image"
