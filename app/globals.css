@@ -8,11 +8,11 @@
   --font-montserrat: var(--font-montserrat);
   --font-raleway: var(--font-raleway);
   --font-manrope: var(--font-manrope);
-  --font-noto-sans: var(--font-noto-sans);
+  --font-quicksand: var(--font-quicksand);
 }
 
 * {
-  font-family: var(--font-noto-sans);
+  font-family: var(--font-quicksand);
 }
 
 .inter {
@@ -35,6 +35,6 @@
   font-family: var(--font-manrope);
 }
 
-.noto{
-  font-family: var(--font-noto-sans);
+.quicksand {
+  font-family: var(--font-quicksand);
 }

@@ -10,6 +10,14 @@ export default function page() {
       <Navbar/>
       <Home/>
       <About/>
+      <div className="relative flex-1 overflow-hidden min-h-[600px]">
+        <Image
+          src="/about2.jpg"
+          alt="Behavior Space Clinic"
+          fill
+          className="object-cover brightness-50"
+        />
+    </div>
     </>
   );
 }

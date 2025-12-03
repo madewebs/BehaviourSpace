@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-transparent fixed top-0 left-0 right-0 w-full px-4 py-6 md:py-8 z-50">
-      <div className="bg-[#ffffff] shadow-md rounded-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#ffffff] shadow-lg rounded-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Option 1: Using Tailwind classes */}
         <div className="flex justify-between items-center text-black/90 h-14 md:h-16">
           {/* Logo */}
@@ -27,7 +27,7 @@ export default function Navbar() {
                 src="/logo.png"
               />
               {/* Option 2: Using imported font className */}
-              <span className='font-semibold raleway text-[#016b70]'>BehaviourSpace</span>
+              <span className='font-semibold raleway text-[#016b70]'>BehaviorSpace</span>
             </Link>
           </div>
 

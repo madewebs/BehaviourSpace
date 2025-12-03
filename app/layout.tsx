@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { exo, interTight, eduHand, montserrat, raleway, manrope, notoSans } from "./fonts";
+import { exo, interTight, eduHand, montserrat, raleway, manrope, quicksand } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,10 +23,10 @@ export default function RootLayout({
         "--font-montserrat": montserrat.style.fontFamily,
         "--font-raleway": raleway.style.fontFamily,
         "--font-manrope": manrope.style.fontFamily,
-        "--font-noto-sans": notoSans.style.fontFamily,
+        "--font-quicksand": quicksand.style.fontFamily,
       } as React.CSSProperties}
     >
-      <body className={`${notoSans.className} antialiased`}>{children}</body>
+      <body className={`${quicksand.className} antialiased`}>{children}</body>
     </html>
   );
 }

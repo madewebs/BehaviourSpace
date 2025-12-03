@@ -14,7 +14,7 @@ const config: Config = {
         "montserrat": ["var(--font-montserrat)"],
         "raleway": ["var(--font-raleway)"],
         "manrope": ["var(--font-manrope)"],
-        "noto-sans": ["var(--font-noto-sans)"],
+        "quicksand": ["var(--font-quicksand)"],
       }
     },
   },
