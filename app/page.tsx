@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Home from "@/components/Home";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 
 
 export default function page() {
@@ -18,6 +19,7 @@ export default function page() {
           className="object-cover brightness-50"
         />
     </div>
+    <Footer/>
     </>
   );
 }

@@ -4,9 +4,9 @@ import Image from 'next/image'
 
 export default function About() {
   return (
-    <div className='bg-[#fefefe] text-[#005658] w-full py-8 md:py-12 px-4 md:px-6'>
+    <div className='bg-[#fefefe] text-[#005658] w-full py-8 md:py-14 px-4 md:px-6'>
 
-      <div className='max-w-full mx-auto md:max-w-7xl flex flex-col lg:flex-row gap-16 items-stretch'>
+      <div className='max-w-full mx-auto md:max-w-7xl flex flex-col lg:flex-row gap-10 items-stretch'>
         
         {/* Content Section */}
         <div className='space-y-5 flex-1 font-medium'>
