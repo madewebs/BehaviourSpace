@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { exo, interTight, eduHand } from "@/app/fonts"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,9 +15,9 @@ export default function Navbar() {
     <nav className="bg-transparent fixed top-0 left-0 right-0 w-full px-4 py-6 md:py-8 z-50">
       <div className="bg-[#ffffff] shadow-lg rounded-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Option 1: Using Tailwind classes */}
-        <div className="flex justify-between items-center text-black/90 h-14 md:h-16">
+        <div className="flex justify-between items-center text-black/90 h-16 md:h-18">
           {/* Logo */}
-          <div className="flex-shrink-1">
+          <div className="shrink">
             <Link href="/" className="text-lg md:text-xl flex items-center space-x-2 font-normal">
               <Image
                 width={50}
