@@ -4,6 +4,7 @@ import Home from "@/components/Home";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
+import Team from "@/components/Team";
 
 
 export default function page() {
@@ -20,6 +21,7 @@ export default function page() {
           className="object-cover brightness-50"
         />
     </div> */}
+    <Team/>
     <Contact/>
     <Footer/>
     </>

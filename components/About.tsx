@@ -18,11 +18,11 @@ export default function About() {
             Reset Anxiety. Rebuild Balance. Reclaim You.
           </p>
 
-          <p className='mt-4 text-lg md:text-xl leading-7 md:leading-8 tracking-wider'>
+          <p className='mt-4 text-lg md:text-xl leading-7 md:leading-8 tracking-wide'>
             Find calm, clarity, and control with evidence-based behavioral therapy.
           </p>
 
-          <p className='mt-2 text-lg md:text-xl leading-7 md:leading-8 tracking-wider'>
+          <p className='mt-2 text-lg md:text-xl leading-7 md:leading-8 tracking-wide'>
             Through the{' '}
             <span className='font-semibold'>A.B.T. Reset Framework</span> —{' '}
             <span className='font-semibold'>
@@ -34,11 +34,11 @@ export default function About() {
           <h3 className='mt-5 text-2xl md:text-3xl'>
             Support for Children
           </h3>
-          <p className='mt-2 text-lg md:text-xl leading-7 md:leading-8 tracking-wider'>
+          <p className='mt-2 text-lg md:text-xl leading-7 md:leading-8 tracking-wide'>
             We also provide specialized support for behavioral problems and learning disabilities in children, including ADHD, ASD, ODD, and academic or developmental challenges. Our child-focused behavioral interventions help improve self-regulation, attention, emotional functioning, and learning skills.
           </p>
 
-          <p className='mt-4 text-xl md:text-2xl leading-7 md:leading-8'>
+          <p className='mt-4 text-xl md:text-2xl leading-7 md:leading-8 tracking-wide'>
             Start your journey toward a stable, anxiety-free mind — for you and your child.
           </p>
           <div className='flex gap-6 mt-6 md:mt-8 flex-row font-medium'>

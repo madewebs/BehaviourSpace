@@ -37,7 +37,7 @@ export default function Enquiry() {
   }
 
   return (
-    <div className="w-full py-12 md:py-16 px-4">
+    <div className="w-full py-8 md:py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 md:gap-12">
           
@@ -76,13 +76,13 @@ export default function Enquiry() {
 
           {/* Contact Form Section */}
           <div className="flex-1">
-            <div className="bg-white rounded-xs shadow-lg p-4 md:p-8">
-              <h2 className="text-2xl md:text-4xl font-medium text-gray-900 mb-6">Send us a Message</h2>
+            <div className="bg-white rounded-xs shadow-xl p-4 md:p-8">
+              <h2 className="text-2xl md:text-4xl font-medium text-gray-900 mb-4 md:mb-6">Send us a Message</h2>
               
-              <form onSubmit={handleWhatsApp} className="space-y-5">
+              <form onSubmit={handleWhatsApp} className="space-y-6">
                 {/* Name Field */}
                 <div>
-                  <label htmlFor="name" className="block text-md font-medium text-gray-700 mb-2">
+                  <label htmlFor="name" className="block text-md font-medium text-gray-700 mb-1">
                     Name
                   </label>
                   <input
@@ -98,7 +98,7 @@ export default function Enquiry() {
                 </div>
                 {/* Phone Field */}
                 <div>
-                  <label htmlFor="phone" className="block text-md font-medium text-gray-700 mb-2">
+                  <label htmlFor="phone" className="block text-md font-medium text-gray-700 mb-1">
                     Phone Number
                   </label>
                   <input
@@ -115,7 +115,7 @@ export default function Enquiry() {
 
                 {/* Email Field */}
                 <div>
-                  <label htmlFor="email" className="block text-md font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-md font-medium text-gray-700 mb-1">
                     Email
                   </label>
                   <input
@@ -132,7 +132,7 @@ export default function Enquiry() {
 
                 {/* Message Field */}
                 <div>
-                  <label htmlFor="message" className="block text-md font-medium text-gray-700 mb-2">
+                  <label htmlFor="message" className="block text-md font-medium text-gray-700 mb-1">
                     Message
                   </label>
                   <textarea
