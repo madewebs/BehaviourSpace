@@ -43,7 +43,7 @@ export default function Enquiry() {
           
           {/* Content Section */}
           <div className="flex-1 flex flex-col justify-start">
-            <h1 className="mont text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
+            <h1 className="mont text-4xl md:text-5xl font-semibold text-gray-900 mb-2">
               Get in Touch
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-4">
@@ -79,7 +79,7 @@ export default function Enquiry() {
             <div className="bg-white rounded-xs shadow-xl p-4 md:p-8">
               <h2 className="text-2xl md:text-4xl font-medium text-gray-900 mb-4 md:mb-6">Send us a Message</h2>
               
-              <form onSubmit={handleWhatsApp} className="space-y-6">
+              <form onSubmit={handleWhatsApp} className="space-y-4">
                 {/* Name Field */}
                 <div>
                   <label htmlFor="name" className="block text-md font-medium text-gray-700 mb-1">
@@ -141,7 +141,7 @@ export default function Enquiry() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:none transition resize-none"
+                    className="w-full px-4 py-3 h-24 border border-gray-300 rounded-xs outline-none focus:none transition resize-none"
                     placeholder="Your Message"
                     required
                   />
@@ -150,13 +150,13 @@ export default function Enquiry() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-[#006e69] hover:bg-[#004642] transition text-[#fefefe] font-semibold py-3 rounded-sm duration-200 mt-6"
+                  className="w-full bg-[#006e69] hover:bg-[#004642] transition text-[#fefefe] font-semibold py-3 rounded-sm duration-200 mt-2"
                 >
                   Send via WhatsApp
                 </button>
               </form>
 
-              <p className="text-sm text-gray-500 text-center mt-4 font-inter-tight">
+              <p className="text-sm text-gray-500 text-center mt-2">
                 We'll respond to your inquiry within 24 hours.
               </p>
             </div>
