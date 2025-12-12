@@ -162,7 +162,7 @@ export default function Team() {
           {teamMembers.map((member) => (
             <div
               key={member.id}
-              className="shrink-0 w-full md:w-72 h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex items-center justify-center relative"
+              className="shrink-0 pmw-full md:w-72 h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex items-center justify-center relative"
             >
               <Image
                 src={member.image || '/logo.png'}

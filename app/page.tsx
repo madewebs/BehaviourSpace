@@ -21,7 +21,7 @@ export default function page() {
           className="object-cover brightness-50"
         />
     </div> */}
-    <Team/>
+    {/* <Team/> */}
     <Contact/>
     <Footer/>
     </>

@@ -46,10 +46,10 @@ export default function Enquiry() {
             <h1 className="mont text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
               Get in Touch
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-4 font-inter-tight">
+            <p className="text-lg md:text-xl text-gray-700 mb-4">
               Have questions about our healing and wellness programs? We're here to help and support your journey to better mental health.
             </p>
-            <p className="text-md text-gray-600 mb-8 font-inter-tight">
+            <p className="text-md text-gray-600 mb-8 ">
               Reach out to us through the contact form, and we'll get back to you as soon as possible. Your wellbeing is our priority.
             </p>
             
