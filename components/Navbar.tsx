@@ -31,17 +31,14 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex space-x-12 text-lg font-medium  text-black/70">
+          <div className="hidden lg:flex space-x-8 text-lg font-medium  text-black/70">
             <Link href="/">
               Home
             </Link>
             <Link href="/about" >
               About
             </Link>
-            <Link href="/about" >
-              Blog
-            </Link>
-            <Link href="/about" >
+            <Link href="/therapists" >
               Therapists
             </Link>
             <Link href="/contact">

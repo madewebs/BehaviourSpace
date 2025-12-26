@@ -43,10 +43,10 @@ export default function Enquiry() {
           
           {/* Content Section */}
           <div className="flex-1 flex flex-col justify-start">
-            <h1 className="mont text-4xl md:text-5xl font-semibold text-gray-900 mb-2">
+            <h1 className="mont text-3xl md:text-4xl  text-gray-900 mb-2">
               Get in Touch
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-4">
+            <p className="text-md md:text-xl text-gray-700 mb-4">
               Have questions about our healing and wellness programs? We're here to help and support your journey to better mental health.
             </p>
             <p className="text-md text-gray-600 mb-8 ">
@@ -55,7 +55,7 @@ export default function Enquiry() {
             
             <div className="space-y-6">
               <div>
-                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">Why Connect With Us?</h3>
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Why Connect With Us?</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start text-lg">
                     <span className="text-gray-700 mr-3">✓</span>

@@ -1,211 +1,267 @@
-'use client';
-
-import React, { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
-import gsap from 'gsap';
-import { teamMembers, TeamMember } from '@/data/teamdata';
+'use client'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { team } from '../data/teamdata'
 
 export default function Team() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const cardsRef = useRef<HTMLElement[]>([])
+  const [current, setCurrent] = useState(0)
 
-  // Check if mobile on mount
+  // Autoplay helpers
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const isPausedRef = useRef(false)
+  const currentRef = useRef(0)
+
+  const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n))
+
+  const centerCard = (index: number, animate = true) => {
+    const container = trackRef.current
+    const card = cardsRef.current[index]
+    if (!container || !card) return
+
+    const maxScroll = container.scrollWidth - container.clientWidth
+    const target =
+      clamp(
+        card.offsetLeft - (container.clientWidth - card.clientWidth) / 2,
+        0,
+        Math.max(0, maxScroll)
+      )
+
+    if (animate) {
+      gsap.to(container, {
+        scrollLeft: target,
+        duration: 0.6,
+        ease: 'power3.out',
+      })
+    } else {
+      container.scrollLeft = target
+    }
+    setCurrent(index)
+  }
+
+  const goNext = () => {
+    const next = clamp(current + 1, 0, team.length - 1)
+    centerCard(next)
+    restartAutoplay()
+  }
+  const goPrev = () => {
+    const prev = clamp(current - 1, 0, team.length - 1)
+    centerCard(prev)
+    restartAutoplay()
+  }
+
+  // Initial entrance animation for cards
+  useLayoutEffect(() => {
+    if (!trackRef.current) return
+    const ctx = gsap.context(() => {
+      gsap.from('.team-card', {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.08,
+      })
+    }, trackRef)
+    return () => ctx.revert()
+  }, [])
+
+  // Center first card on mount and on resize
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    centerCard(0, false)
+    const onResize = () => centerCard(currentRef.current, false)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  // Auto-scroll functionality with GSAP
+  // Keep a ref in sync with current
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+    currentRef.current = current
+  }, [current])
 
-    const autoScroll = () => {
-      if (!isDragging) {
-        const nextIndex = (currentIndex + 1) % teamMembers.length;
+  // Keyboard arrow navigation
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goNext()
+      if (e.key === 'ArrowLeft') goPrev()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current])
 
-        if (isMobile) {
-          // Mobile: scroll one card at a time (full width)
-          const cardWidth = container.offsetWidth;
-          gsap.to(container, {
-            scrollLeft: nextIndex * cardWidth,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          });
-        } else {
-          // Desktop: scroll by card width + gap
-          const cardWidth = 280 + 24;
-          gsap.to(container, {
-            scrollLeft: nextIndex * cardWidth,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          });
-        }
+  // Autoplay: advance every 3.5s, loop, pause on hover and tab hidden
+  const startAutoplay = () => {
+    if (autoplayRef.current) return
+    autoplayRef.current = setInterval(() => {
+      const next = (currentRef.current + 1) % team.length
+      centerCard(next)
+    }, 3500)
+  }
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current)
+      autoplayRef.current = null
+    }
+  }
+  const restartAutoplay = () => {
+    stopAutoplay()
+    if (!isPausedRef.current) startAutoplay()
+  }
 
-        setCurrentIndex(nextIndex);
+  useEffect(() => {
+    startAutoplay()
+    const handleVisibility = () => {
+      if (document.hidden) {
+        stopAutoplay()
+      } else if (!isPausedRef.current) {
+        startAutoplay()
       }
-    };
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => {
+      stopAutoplay()
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    const interval = setInterval(autoScroll, 4000); // Auto-scroll every 4 seconds
-    return () => clearInterval(interval);
-  }, [isDragging, currentIndex, teamMembers.length, isMobile]);
-
-  // Arrow key controls
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const container = scrollContainerRef.current;
-      if (!container) return;
-
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        const prevIndex = (currentIndex - 1 + teamMembers.length) % teamMembers.length;
-        
-        if (isMobile) {
-          const cardWidth = container.offsetWidth;
-          gsap.to(container, {
-            scrollLeft: prevIndex * cardWidth,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          });
-        } else {
-          const cardWidth = 280 + 24;
-          gsap.to(container, {
-            scrollLeft: prevIndex * cardWidth,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          });
-        }
-        setCurrentIndex(prevIndex);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        const nextIndex = (currentIndex + 1) % teamMembers.length;
-        
-        if (isMobile) {
-          const cardWidth = container.offsetWidth;
-          gsap.to(container, {
-            scrollLeft: nextIndex * cardWidth,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          });
-        } else {
-          const cardWidth = 280 + 24;
-          gsap.to(container, {
-            scrollLeft: nextIndex * cardWidth,
-            duration: 0.8,
-            ease: 'power2.inOut',
-          });
-        }
-        setCurrentIndex(nextIndex);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, teamMembers.length, isMobile]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.pageX - (scrollContainerRef.current?.offsetLeft || 0));
-    setScrollLeft(scrollContainerRef.current?.scrollLeft || 0);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollContainerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - (scrollContainerRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 1.5;
-    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - (scrollContainerRef.current?.offsetLeft || 0));
-    setScrollLeft(scrollContainerRef.current?.scrollLeft || 0);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !scrollContainerRef.current) return;
-    const x = e.touches[0].pageX - (scrollContainerRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 1.5;
-    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
-  };
+  const atStart = current <= 0
+  const atEnd = current >= team.length - 1
 
   return (
-    <section className="py-12 px-4 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Team</h2>
+    <section className="w-full py-4 md:py-8">
+      <div className="mx-auto w-full max-w-7xl px-4">
+        <div className="mb-4 flex items-center justify-between gap-2">
+          <h2 className=" text-3xl md:text-4xl text-gray-900 mb-2 ">Meet Our Team</h2>
+          <div className="flex items-center gap-2">
+            <button
+              aria-label="Previous"
+              onClick={goPrev}
+              className={`inline-flex h-12 w-12 items-center justify-center rounded-md border text-sm transition
+              ${atStart ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}
+              border-gray-200 bg-white text-black`}
+              disabled={atStart}
+              type="button"
+            >
+              ‹
+            </button>
+            <button
+              aria-label="Next"
+              onClick={goNext}
+              className={`inline-flex h-12 w-12 items-center justify-center rounded-md border text-sm transition
+              ${atEnd ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}
+              border-gray-200 bg-white text-black`}
+              disabled={atEnd}
+              type="button"
+            >
+              ›
+            </button>
+          </div>
+        </div>
 
         <div
-          ref={scrollContainerRef}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onMouseMove={handleMouseMove}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleMouseUp}
-          className="flex gap-6 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing md:cursor-default"
-          style={{ scrollBehavior: 'auto' }}
+          ref={trackRef}
+          className="no-scrollbar flex gap-6 overflow-x-auto pb-2"
+          onMouseEnter={() => {
+            isPausedRef.current = true
+            stopAutoplay()
+          }}
+          onMouseLeave={() => {
+            isPausedRef.current = false
+            startAutoplay()
+          }}
         >
-          {teamMembers.map((member) => (
-            <div
-              key={member.id}
-              className="shrink-0 pmw-full md:w-72 h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex items-center justify-center relative"
+          {team.map((m, i) => (
+            <article
+              key={m.id}
+              ref={(el) => {
+                if (el) cardsRef.current[i] = el
+              }}
+              onClick={() => {
+                centerCard(i)
+                restartAutoplay()
+              }}
+              className="team-card relative snap-start shrink-0 w-88 sm:w-104 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md"
             >
-              <Image
-                src={member.image || '/logo.png'}
-                alt={member.name}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+              <div className="relative h-80 sm:h-96 w-full">
+                <img
+                  src={m.image}
+                  alt={m.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                {/* fixed gradient class */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <h3 className="text-lg font-semibold text-white drop-shadow">{m.name}</h3>
+                  <p className="text-sm text-white/90 drop-shadow">{m.role}</p>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200 p-4">
+                {m.bio && <p className="text-sm text-gray-700 line-clamp-3">{m.bio}</p>}
+                {m.socials && (
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    {m.socials.linkedin && (
+                      <a
+                        href={m.socials.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs text-blue-600 hover:underline"
+                      >
+                        LinkedIn
+                      </a>
+                    )}
+                    {m.socials.github && (
+                      <a
+                        href={m.socials.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs text-gray-800 hover:underline"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                    {m.socials.twitter && (
+                      <a
+                        href={m.socials.twitter}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs text-sky-600 hover:underline"
+                      >
+                        X
+                      </a>
+                    )}
+                    {m.socials.website && (
+                      <a
+                        href={m.socials.website}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs text-indigo-600 hover:underline"
+                      >
+                        Website
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </article>
           ))}
         </div>
 
-        {/* Indicator dots for mobile */}
-        {isMobile && (
-          <div className="flex justify-center gap-2 mt-6">
-            {teamMembers.map((_, index) => (
-              <div
-                key={index}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'
-                }`}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Arrow key hint for desktop */}
-        {/* {!isMobile && (
-          <p className="text-center text-gray-500 text-sm mt-6">
-            Use ← → arrow keys to navigate
-          </p>
-        )} */}
+        {/* Hide scrollbar (WebKit, Firefox, old Edge) */}
+        <style jsx>{`
+          .no-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
-  );
+  )
 }
