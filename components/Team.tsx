@@ -134,12 +134,12 @@ export default function Team() {
     <section className="w-full py-4 md:py-8">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-4 flex items-center justify-between gap-2">
-          <h2 className=" text-3xl md:text-4xl text-gray-900 mb-2 ">Meet Our Team</h2>
+          <h2 className=" text-3xl md:text-4xl text-[#00494b] mb-2 font-medium">Meet Our Team</h2>
           <div className="flex items-center gap-2">
             <button
               aria-label="Previous"
               onClick={goPrev}
-              className={`inline-flex h-12 w-12 items-center justify-center rounded-md border text-sm transition
+              className={`inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm transition
               ${atStart ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}
               border-gray-200 bg-white text-black`}
               disabled={atStart}
@@ -150,7 +150,7 @@ export default function Team() {
             <button
               aria-label="Next"
               onClick={goNext}
-              className={`inline-flex h-12 w-12 items-center justify-center rounded-md border text-sm transition
+              className={`inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm transition
               ${atEnd ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}
               border-gray-200 bg-white text-black`}
               disabled={atEnd}
@@ -163,7 +163,7 @@ export default function Team() {
 
         <div
           ref={trackRef}
-          className="no-scrollbar flex gap-6 overflow-x-auto pb-2"
+          className="no-scrollbar flex gap-4 md:gap-6 overflow-x-auto pb-2 snap-x snap-mandatory"
           onMouseEnter={() => {
             isPausedRef.current = true
             stopAutoplay()
@@ -183,24 +183,25 @@ export default function Team() {
                 centerCard(i)
                 restartAutoplay()
               }}
-              className="team-card relative snap-start shrink-0 w-88 sm:w-104 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md"
+              className="team-card relative snap-start shrink-0 w-[85vw] max-w-104 sm:w-104 md:w-104 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md"
             >
-              <div className="relative h-80 sm:h-96 w-full">
+              <div className="relative h-80 sm:h-88 md:h-96 w-full">
                 <img
                   src={m.image}
                   alt={m.name}
                   className="h-full w-full object-cover"
                   loading="lazy"
+                  draggable={false}
                 />
-                {/* fixed gradient class */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4">
+                {/* fixed gradient + layering */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/70 via-black/30 to-transparent z-10" />
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20">
                   <h3 className="text-lg font-semibold text-white drop-shadow">{m.name}</h3>
                   <p className="text-sm text-white/90 drop-shadow">{m.role}</p>
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 p-4">
+              {/* <div className="border-t border-gray-200 p-4">
                 {m.bio && <p className="text-sm text-gray-700 line-clamp-3">{m.bio}</p>}
                 {m.socials && (
                   <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -246,7 +247,7 @@ export default function Team() {
                     )}
                   </div>
                 )}
-              </div>
+              </div> */}
             </article>
           ))}
         </div>

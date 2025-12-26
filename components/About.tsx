@@ -1,10 +1,37 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
+import gsap from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { useRouter } from 'next/navigation'
 
+gsap.registerPlugin(ScrollToPlugin)
 
 export default function About() {
+  const router = useRouter()
+
+  const getOffsetY = () => {
+    const navEl = document.querySelector('nav') as HTMLElement | null
+    return (navEl?.offsetHeight || 72) + 8
+  }
+
+  const scrollToContact = () => {
+    // If on home and #contact exists, animate; else navigate to /#contact
+    const contactEl = document.getElementById('contact')
+    if (typeof window !== 'undefined' && window.location.pathname === '/' && contactEl) {
+      gsap.to(window, {
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTo: { y: contactEl, offsetY: getOffsetY() }
+      })
+    } else {
+      router.push('/#contact')
+    }
+  }
+
   return (
-    <div className='bg-[#fefefe] text-[#00494b] w-full py-10 md:py-14 '>
+    <div className='bg-[#fefefe] text-[#00494b] w-full py-10 md:py-14'>
 
       <div className='max-w-full mx-auto md:max-w-7xl flex flex-col md:flex-row gap-8 md:gap-6 items-stretch md:items-center px-4 md:px-6'>
 
@@ -29,11 +56,21 @@ export default function About() {
           </p>
 
           <div className='flex gap-8 mt-5 md:mt-6 flex-row font-medium'>
-            <button className='bg-[#016b70] text-white px-4 md:px-6 py-4 rounded-sm border border-[#016b70] shadow-md hover:bg-white hover:text-[#016b70] hover:border-[#016b70] hover:scale-107 duration-600 transition'>
+            {/* Go to /bookings */}
+            <button
+              type="button"
+              onClick={() => router.push('/booking')}
+              className='bg-[#016b70] text-white px-4 md:px-6 py-4 rounded-sm border border-[#016b70] shadow-md hover:bg-white hover:text-[#016b70] hover:border-[#016b70] hover:scale-107 duration-600 transition'
+            >
               Book a Consultation
             </button>
 
-            <button className='bg-white text-[#016b70] px-4 md:px-6 py-4 rounded-sm border border-[#016b70] shadow-md hover:bg-[#016b70] hover:text-white hover:border-[#016b70] transition hover:scale-107 duration-400'>
+            {/* GSAP scroll to #contact */}
+            <button
+              type="button"
+              onClick={scrollToContact}
+              className='bg-white text-[#016b70] px-4 md:px-6 py-4 rounded-sm border border-[#016b70] shadow-md hover:bg-[#016b70] hover:text-white hover:border-[#016b70] transition hover:scale-107 duration-400'
+            >
               For Enquiry
             </button>
           </div>
@@ -63,11 +100,12 @@ export default function About() {
         <div className='inset-0 absolute z-0 bg-black/60' />
 
         <div className="absolute inset-0 bg-black/30"></div>
-        <div className="relative max-w-full mx-auto md:max-w-7xl px-0 py-12 md:py-16 text-center inter text-white">
-          <p className="text-lg md:text-xl leading-relaxed">
+
+        <div className="relative max-w-full mx-auto md:max-w-7xl py-12 md:py-14 text-center inter text-white px-4">
+          <p className="text-md md:text-xl">
             We also provide specialized support for behavioral problems and learning disabilities in children, including ADHD, ASD, ODD, and academic or developmental challenges. Our child-focused behavioral interventions help improve self-regulation, attention, emotional functioning, and learning skills.
           </p>
-          <p className="mt-2 font-medium italic text-xl md:text-2xl">
+          <p className="mt-2 font-medium italic text-md md:text-xl">
             Start your journey toward a stable, anxiety-free mind — for you and your child.
           </p>
         </div>

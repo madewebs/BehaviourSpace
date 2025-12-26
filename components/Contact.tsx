@@ -37,13 +37,13 @@ export default function Enquiry() {
   }
 
   return (
-    <div className="w-full py-8 md:py-12 px-4">
+    <div className="w-full py-8 md:py-12 px-4" id='contact'>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 md:gap-12">
           
           {/* Content Section */}
           <div className="flex-1 flex flex-col justify-start">
-            <h1 className="mont text-3xl md:text-4xl  text-gray-900 mb-2">
+            <h1 className="mont text-3xl md:text-4xl  text-[#00494b] font-medium mb-2">
               Get in Touch
             </h1>
             <p className="text-md md:text-xl text-gray-700 mb-4">
@@ -77,7 +77,7 @@ export default function Enquiry() {
           {/* Contact Form Section */}
           <div className="flex-1">
             <div className="bg-white rounded-xs shadow-xl p-4 md:p-8">
-              <h2 className="text-2xl md:text-4xl font-medium text-gray-900 mb-4 md:mb-6">Send us a Message</h2>
+              <h2 className="text-xl md:text-2xl font-medium text-[#016b70] mb-4 md:mb-6">Send us a Message</h2>
               
               <form onSubmit={handleWhatsApp} className="space-y-4">
                 {/* Name Field */}

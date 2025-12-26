@@ -15,7 +15,7 @@ export type TeamMember = {
 export const team: TeamMember[] = [
   {
     id: '1',
-    name: 'Praveen pattanchery',
+    name: 'Praveen Pattanchery',
     role: 'Behavior psychologist',
     image:'./team/praveen.jpeg',
     bio:'' ,
@@ -26,7 +26,7 @@ export const team: TeamMember[] = [
   },
   {
     id: '2',
-    name: 'Padmasree anumod',
+    name: 'Padmasree Anumod',
     role: 'Counseling psychology and behaviour therapist',
     image:
       './team/padmasree.jpeg',

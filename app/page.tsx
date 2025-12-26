@@ -11,10 +11,10 @@ export default function page() {
   return (
     <>
       <Navbar/>
-      <Home/>
-      <About/>
-      <Team/>
-    <Contact/>
+    <section id="home"><Home /></section>
+    <section id="about"><About /></section>
+    <section id="therapists"><Team /></section>
+    <section id="contact"><Contact /></section>
     <Footer/>
     </>
   );

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-[75vh] md:min-h-[85vh] w-full h-full relative flex items-center justify-start">
         <Image
-          src="/landing.jpg"
+          src="/landing.webp"
           alt="Description of image"
           fill
           className="object-cover brightness-30"
