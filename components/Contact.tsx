@@ -1,10 +1,12 @@
 'use client'
 import React, { useState } from 'react'
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css' // Import the default styles for the input
 
 export default function Enquiry() {
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
+    phone: '', // Now a single field for the full phone number (including country code)
     email: '',
     message: ''
   })
@@ -14,6 +16,14 @@ export default function Enquiry() {
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }))
+  }
+
+  // New handler for the phone input (from react-phone-number-input)
+  const handlePhoneChange = (value: string | undefined) => {
+    setFormData(prev => ({
+      ...prev,
+      phone: value || ''
     }))
   }
 
@@ -29,6 +39,7 @@ export default function Enquiry() {
     // Replace with your WhatsApp business number (with country code, e.g., 919876543210)
     const recipientPhone = '918075595509'
     
+    // The phone is already in international format from the library, so use it directly
     const whatsappMessage = `Name: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AMessage: ${message}`
     const whatsappURL = `https://wa.me/${recipientPhone}?text=For Enquiry%0A${whatsappMessage}`
     
@@ -91,23 +102,22 @@ export default function Enquiry() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:none "
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:outline-none"
                     placeholder="Your Name"
                     required
                   />
                 </div>
-                {/* Phone Field */}
+                {/* Phone Field with Country Code and Flags */}
                 <div>
                   <label htmlFor="phone" className="block text-md font-medium text-gray-700 mb-1">
                     Phone Number
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
+                  <PhoneInput
+                    international
+                    defaultCountry="IN" // Default to India, adjust as needed
                     value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:none "
+                    onChange={handlePhoneChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:outline-none"
                     placeholder="Your Phone Number"
                     required
                   />
@@ -124,7 +134,7 @@ export default function Enquiry() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xs outline-none focus:outline-none"
                     placeholder="Your Email"
                     required
                   />
@@ -141,7 +151,7 @@ export default function Enquiry() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3 h-24 border border-gray-300 rounded-xs outline-none focus:none transition resize-none"
+                    className="w-full px-4 py-3 h-24 border border-gray-300 rounded-xs outline-none focus:outline-none transition resize-none"
                     placeholder="Your Message"
                     required
                   />

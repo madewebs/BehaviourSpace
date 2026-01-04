@@ -78,7 +78,7 @@ export default function About() {
         {/* Image Section */}
         <div className="relative flex-1 rounded-sm overflow-hidden min-h-[600px]">
           <Image
-            src="/aboutimg.jpg"
+            src="/aboutimg.webp"
             alt="Behavior Space Clinic"
             fill
             className="object-cover"

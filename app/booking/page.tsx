@@ -1,8 +1,10 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8075595509";
 const DEFAULT_COUNTRY_CODE = process.env.NEXT_PUBLIC_DEFAULT_COUNTRY_CODE || "91";
@@ -27,13 +29,15 @@ function normalizeWhatsAppNumber(input: string) {
 }
 
 export default function BookingsPage() {
+  const [phoneValue, setPhoneValue] = useState("");
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
 
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
-    const phone = String(fd.get("phone") || "").trim();
+    const phone = phoneValue || String(fd.get("phone") || "").trim(); // Use state value if available
     const age = String(fd.get("age") || "").trim();
     const date = String(fd.get("date") || "").trim(); // YYYY-MM-DD
 
@@ -100,14 +104,13 @@ export default function BookingsPage() {
 
             <label className="block space-y-2 w-full">
               <span className="text-md md:text-xl">Phone Number</span>
-              <input
+              <PhoneInput
                 name="phone"
-                type="tel"
-                required
-                placeholder="98XXXXXXXX"
-                pattern="[\d\s()-]{7,}"
-                autoComplete="tel"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:outline-none focus:ring-0 focus:border-gray-300"
+                defaultCountry="in"
+                value={phoneValue}
+                onChange={(phone) => setPhoneValue(phone)}
+                inputClassName="w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:outline-none focus:ring-0 focus:border-gray-300"
+                className="w-full"
               />
             </label>
 
