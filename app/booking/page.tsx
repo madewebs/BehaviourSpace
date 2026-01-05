@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8075595509";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "7907961350";
 const DEFAULT_COUNTRY_CODE = process.env.NEXT_PUBLIC_DEFAULT_COUNTRY_CODE || "91";
 // Provide a normal personal WhatsApp number (local). We’ll auto-prefix the country code.
 // Example: NEXT_PUBLIC_WHATSAPP_NUMBER=9876543210

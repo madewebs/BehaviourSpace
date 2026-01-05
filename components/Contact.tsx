@@ -37,7 +37,7 @@ export default function Enquiry() {
     }
 
     // Replace with your WhatsApp business number (with country code, e.g., 919876543210)
-    const recipientPhone = '918075595509'
+    const recipientPhone = '917907961350'
     
     // The phone is already in international format from the library, so use it directly
     const whatsappMessage = `Name: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AMessage: ${message}`
