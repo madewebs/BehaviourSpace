@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <div className="min-h-[75vh] md:min-h-[85vh] w-full h-full relative flex items-center justify-start">
         <Image
-          src="/home.webp"
+          src="/land.webp"
           alt="Description of image"
           fill
-          className="object-cover brightness-30"
+          className="object-cover brightness-50"
         />
       
         <div className="relative text-left md:text-center mx-auto z-10 px-4 md:px-20">

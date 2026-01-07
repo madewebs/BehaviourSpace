@@ -66,7 +66,7 @@ export default function Enquiry() {
             
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Why Connect With Us?</h3>
+                <h3 className="text-xl md:text-2xl font-medium text-gray-900 mb-2">Why Connect With Us?</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start text-lg">
                     <span className="text-gray-700 mr-3">✓</span>

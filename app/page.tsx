@@ -5,6 +5,8 @@ import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Team from "@/components/Team";
+import Services from "@/components/Services";
+import Location from "@/components/Location";
 
 
 export default function page() {
@@ -14,7 +16,9 @@ export default function page() {
     <section id="home"><Home /></section>
     <section id="about"><About /></section>
     <section id="therapists"><Team /></section>
+    <section id="services"><Services /></section>
     <section id="contact"><Contact /></section>
+    {/* <section id='location'><Location /></section> */}
     <Footer/>
     </>
   );

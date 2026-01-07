@@ -60,7 +60,7 @@ export default function About() {
             <button
               type="button"
               onClick={() => router.push('/booking')}
-              className='bg-[#016b70] text-white px-4 md:px-6 py-4 rounded-sm border border-[#016b70] shadow-md hover:bg-white hover:text-[#016b70] hover:border-[#016b70] hover:scale-107 duration-600 transition'
+              className='bg-[#016b70] text-white px-4 md:px-6 py-3 rounded-sm border border-[#016b70] shadow-md hover:bg-white hover:text-[#016b70] hover:border-[#016b70] hover:scale-107 duration-600 transition'
             >
               Book a Consultation
             </button>
@@ -69,7 +69,7 @@ export default function About() {
             <button
               type="button"
               onClick={scrollToContact}
-              className='bg-white text-[#016b70] px-4 md:px-6 py-4 rounded-sm border border-[#016b70] shadow-md hover:bg-[#016b70] hover:text-white hover:border-[#016b70] transition hover:scale-107 duration-400'
+              className='bg-white text-[#016b70] px-4 md:px-6 py-3 rounded-sm border border-[#016b70] shadow-md hover:bg-[#016b70] hover:text-white hover:border-[#016b70] transition hover:scale-107 duration-400'
             >
               For Enquiry
             </button>
