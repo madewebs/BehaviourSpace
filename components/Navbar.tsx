@@ -140,7 +140,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center text-black/90 h-14 md:h-16">
           {/* Logo */}
           <div className="shrink">
-            <Link href="/" className="text-lg md:text-xl flex items-center space-x-2 font-normal" onClick={(e) => handleNavClick(e)}>
+            <Link href="/" className="text-md  md:text-xl flex items-center space-x-2 font-normal" onClick={(e) => handleNavClick(e)}>
               <Image
                 width={50}
                 height={50}
@@ -148,7 +148,7 @@ export default function Navbar() {
                 src="/logo.png"
               />
               {/* Option 2: Using imported font className */}
-              <span className='font-semibold raleway text-[#016b70]'>BehaviorSpace</span>
+              <span className='font-semibold raleway text-[#016b70] uppercase font-mont tracking-wider'>behavior space</span>
             </Link>
           </div>
 
