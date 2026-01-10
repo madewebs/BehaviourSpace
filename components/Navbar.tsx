@@ -114,16 +114,8 @@ export default function Navbar() {
 
   // Close on route change without triggering cascading renders
   useEffect(() => {
-    if (!isOpen || typeof window === 'undefined') {
-      return
-    }
-
-    const frame = window.requestAnimationFrame(() => {
-      closeMenu()
-    })
-
-    return () => window.cancelAnimationFrame(frame)
-  }, [closeMenu, isOpen, pathname])
+    closeMenu()
+  }, [closeMenu, pathname])
 
   // Close when resizing to desktop
   useEffect(() => {
