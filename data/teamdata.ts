@@ -2,7 +2,7 @@ export type TeamMember = {
   id: string
   name: string
   role: string
-  image?: string
+  image: string
   bio?: string
   socials?: {
     linkedin?: string
@@ -17,7 +17,7 @@ export const team: TeamMember[] = [
     id: '1',
     name: 'Praveen Pattanchery',
     role: 'Behavior psychologist',
-    image:'./team/praveen.jpeg',
+    image:'/team/praveen.jpeg',
     bio:'' ,
     // socials: {
     //   linkedin: 'https://www.linkedin.com/',
@@ -29,7 +29,7 @@ export const team: TeamMember[] = [
     name: 'Padmasree Anumod',
     role: 'Counseling psychology and behaviour therapist',
     image:
-      './team/padmasree.jpeg',
+      '/team/padmasree.jpeg',
     bio: '',
     // socials: {
     //   github: 'https://github.com/',

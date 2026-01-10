@@ -9,7 +9,6 @@ import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Team from "@/components/Team";
 import Services from "@/components/Services";
-import Location from "@/components/Location";
 import Loader from "@/components/Loader";
 
 export default function Page() {

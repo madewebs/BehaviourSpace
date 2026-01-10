@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import gsap from 'gsap'
 import { team } from '../data/teamdata'
 
@@ -186,11 +187,13 @@ export default function Team() {
               className="team-card relative snap-start shrink-0 w-[85vw] max-w-104 sm:w-104 md:w-104 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md"
             >
               <div className="relative h-80 sm:h-88 md:h-96 w-full">
-                <img
+                <Image
                   src={m.image}
                   alt={m.name}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
+                  fill
+                  sizes="(min-width: 768px) 416px, 85vw"
+                  className="object-cover"
+                  priority={i < 2}
                   draggable={false}
                 />
                 {/* fixed gradient + layering */}

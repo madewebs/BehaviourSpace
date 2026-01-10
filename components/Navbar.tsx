@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -23,24 +23,28 @@ export default function Navbar() {
     setIsOpen(prev => {
       const next = !prev
       if (tlRef.current) {
-        next ? tlRef.current.play() : tlRef.current.reverse()
+        if (next) {
+          tlRef.current.play()
+        } else {
+          tlRef.current.reverse()
+        }
       }
       return next
     })
   }
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setIsOpen(false)
     tlRef.current?.reverse()
-  }
+  }, [])
 
   // Helper: navbar offset
-  const getOffsetY = () => {
+  const getOffsetY = useCallback(() => {
     const navEl = document.querySelector('nav') as HTMLElement | null
     return (navEl?.offsetHeight || 72) + 8
-  }
+  }, [])
 
   // Animate scroll to a given hash (id)
-  const scrollToHash = (hashOrId: string) => {
+  const scrollToHash = useCallback((hashOrId: string) => {
     const id = hashOrId.replace(/^\/?#/, '') // remove optional leading "/" and "#"
     const targetEl = document.getElementById(id)
     if (!targetEl) return
@@ -49,10 +53,10 @@ export default function Navbar() {
       ease: 'power2.out',
       scrollTo: { y: targetEl, offsetY: getOffsetY() }
     })
-  }
+  }, [getOffsetY])
 
   // Click handler for nav items
-  const handleNavClick = (
+  const handleNavClick = useCallback((
     e: React.MouseEvent<HTMLAnchorElement>,
     hash?: string
   ) => {
@@ -71,7 +75,7 @@ export default function Navbar() {
       scrollToHash(hash) // pass just the id
     }
     // Else allow Link to navigate to "/#hash"; initial mount/hashchange effect will animate
-  }
+  }, [closeMenu, pathname, scrollToHash])
 
   useEffect(() => {
     if (!menuRef.current) return
@@ -108,18 +112,31 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  // Close on route change
-  useEffect(() => { closeMenu() }, [pathname])
+  // Close on route change without triggering cascading renders
+  useEffect(() => {
+    if (!isOpen || typeof window === 'undefined') {
+      return
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      closeMenu()
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [closeMenu, isOpen, pathname])
 
   // Close when resizing to desktop
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 1024) closeMenu() }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [])
+  }, [closeMenu])
 
   // Animate when hash changes (e.g., navigating from other pages)
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
     const onHashChange = () => {
       if (window.location.pathname === '/') {
         scrollToHash(window.location.hash)
@@ -131,7 +148,7 @@ export default function Navbar() {
       onHashChange()
     }
     return () => window.removeEventListener('hashchange', onHashChange)
-  }, [])
+  }, [scrollToHash])
 
   return (
     <nav className="bg-transparent fixed top-0 left-0 right-0 w-full px-4 py-6 md:py-8 z-50">
@@ -160,6 +177,7 @@ export default function Navbar() {
             <Link href="/#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</Link>
             <Link
               href="/booking"
+              onClick={closeMenu}
               className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-[#016b70] text-white hover:bg-[#01595c] transition-colors"
             >
               Book Now
@@ -198,6 +216,7 @@ export default function Navbar() {
               <Link href="/#contact" className="px-2 py-2 rounded-md hover:bg-black/5" onClick={(e) => handleNavClick(e, 'contact')}>Contact</Link>
               <Link
                 href="/booking"
+                onClick={closeMenu}
                 className="mt-2 inline-flex items-center justify-center px-4 py-2 rounded-full bg-[#016b70] text-white hover:bg-[#01595c] transition-colors"
               >
                 Book Now

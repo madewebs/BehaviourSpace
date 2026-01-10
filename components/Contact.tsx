@@ -58,10 +58,10 @@ export default function Enquiry() {
               Get in Touch
             </h1>
             <p className="text-md md:text-xl text-gray-700 mb-4">
-              Have questions about our healing and wellness programs? We're here to help and support your journey to better mental health.
+              Have questions about our healing and wellness programs? We&apos;re here to help and support your journey to better mental health.
             </p>
             <p className="text-md text-gray-600 mb-8 ">
-              Reach out to us through the contact form, and we'll get back to you as soon as possible. Your wellbeing is our priority.
+              Reach out to us through the contact form, and we&apos;ll get back to you as soon as possible. Your wellbeing is our priority.
             </p>
             
             <div className="space-y-6">
@@ -167,7 +167,7 @@ export default function Enquiry() {
               </form>
 
               <p className="text-sm text-gray-500 text-center mt-2">
-                We'll respond to your inquiry within 24 hours.
+                We&apos;ll respond to your inquiry within 24 hours.
               </p>
             </div>
           </div>
