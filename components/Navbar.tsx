@@ -19,6 +19,8 @@ export default function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null)
   const tlRef = useRef<gsap.core.Timeline | null>(null)
   const pathname = usePathname()
+  const isHome = pathname === '/'
+  const showScrolledStyle = isScrolled || !isHome
 
   useEffect(() => {
     const handleScroll = () => {
@@ -154,7 +156,7 @@ export default function Navbar() {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
+        showScrolledStyle 
           ? 'py-3 bg-white/80 backdrop-blur-md shadow-sm border-b border-black/5' 
           : 'py-5 bg-transparent'
       }`}
@@ -178,16 +180,16 @@ export default function Navbar() {
                 />
               </div>
               <span className={`text-lg md:text-xl font-semibold tracking-wide uppercase font-mont transition-colors ${
-                isScrolled ? 'text-[#016b70]' : 'text-white drop-shadow-sm'
+                showScrolledStyle ? 'text-[#016b70]' : 'text-white drop-shadow-sm'
               }`}>
-                Behavior<span className={isScrolled ? 'text-[#028b92]' : 'text-white/90'}>Space</span>
+                Behavior<span className={showScrolledStyle ? 'text-[#028b92]' : 'text-white/90'}>Space</span>
               </span>
             </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className={`hidden lg:flex items-center space-x-10 text-lg font-medium transition-colors ${
-            isScrolled ? 'text-black/70' : 'text-white'
+            showScrolledStyle ? 'text-black/70' : 'text-white'
           }`}>
             <Link href="/" className="hover:text-[#016b70] transition-colors" onClick={(e) => handleNavClick(e)}>Home</Link>
             <Link href="/#about" className="hover:text-[#016b70] transition-colors" onClick={(e) => handleNavClick(e, 'about')}>About</Link>
@@ -197,7 +199,7 @@ export default function Navbar() {
               href="/booking"
               onClick={closeMenu}
               className={`inline-flex items-center justify-center px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 active:scale-95 ${
-                isScrolled 
+                showScrolledStyle 
                   ? 'bg-[#016b70] text-white hover:bg-[#01595c] shadow-md hover:shadow-lg' 
                   : 'bg-white text-[#016b70] hover:bg-white/90 shadow-lg'
               }`}
@@ -214,7 +216,7 @@ export default function Navbar() {
               aria-controls="mobile-menu"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               className={`inline-flex items-center justify-center p-2 rounded-xl transition-colors ${
-                isScrolled 
+                showScrolledStyle 
                   ? 'text-black/80' 
                   : 'text-white'
               }`}

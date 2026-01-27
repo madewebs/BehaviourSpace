@@ -71,7 +71,7 @@ export default function BookingsPage() {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-screen items-center justify-center p-4">
+      <main className="flex min-h-screen items-center justify-center p-4 pt-24 md:pt-32">
         <div className="w-full max-w-2xl mx-auto text-center">
           <p className="text-gray-600 mb-5 text-lg md:text-xl">
             Please fill in the details below to book your session. We’ll confirm via WhatsApp.
