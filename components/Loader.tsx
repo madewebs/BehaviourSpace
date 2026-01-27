@@ -47,7 +47,7 @@ export default function Loader({ onComplete }: LoaderProps) {
           ref={textRef}
           className="block text-2xl font-semibold tracking-[0.25rem] uppercase opacity-0"
         >
-          BehaviourSpace
+          BehaviorSpace
         </span>
       </div>
       <div className="mt-4 h-px w-24 bg-[#016b70]/20" />

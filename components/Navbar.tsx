@@ -177,10 +177,10 @@ export default function Navbar() {
                   className="object-contain"
                 />
               </div>
-              <span className={`text-lg md:text-xl font-semibold tracking-tight uppercase font-mont transition-colors ${
+              <span className={`text-lg md:text-xl font-semibold tracking-wide uppercase font-mont transition-colors ${
                 isScrolled ? 'text-[#016b70]' : 'text-white drop-shadow-sm'
               }`}>
-                Behaviour<span className={isScrolled ? 'text-[#028b92]' : 'text-white/90'}>Space</span>
+                Behavior<span className={isScrolled ? 'text-[#028b92]' : 'text-white/90'}>Space</span>
               </span>
             </Link>
           </div>

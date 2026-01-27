@@ -27,7 +27,7 @@ export const team: TeamMember[] = [
   {
     id: '2',
     name: 'Padmasree Anumod',
-    role: 'Counseling psychology and behaviour therapist',
+    role: 'Counseling psychology and behavior therapist',
     image:
       '/team/padmasree.jpeg',
     bio: '',

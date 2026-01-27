@@ -13,10 +13,10 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-white text-lg font-bold mb-4">
-              BehaviourSpace
+              BehaviorSpace
             </h3>
             <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
-              BehaviourSpace is dedicated to providing innovative solutions that
+              BehaviorSpace is dedicated to providing innovative solutions that
               help organizations understand and optimize behavioral patterns.
               We believe in creating meaningful digital experiences that drive
               growth and foster positive change.
@@ -116,7 +116,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-700 mt-10 pt-6 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; {currentYear} BehaviourSpace. All rights reserved.
+            &copy; {currentYear} BehaviorSpace. All rights reserved.
           </p>
           <p className="text-gray-500 text-xs mt-1">
             Designed and developed with precision and care.
