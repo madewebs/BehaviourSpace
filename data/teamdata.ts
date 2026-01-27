@@ -36,4 +36,28 @@ export const team: TeamMember[] = [
     //   linkedin: 'https://www.linkedin.com/',
     // },
   },
+  {
+    id: '3',
+    name: 'Arusha Rathnakar',
+    role: 'Special Educator',
+    image:
+      '/team/arusha.jpeg',
+    bio: '',
+    // socials: {
+    //   github: 'https://github.com/',
+    //   linkedin: 'https://www.linkedin.com/',
+    // },
+  },
+  {
+    id: '4',
+    name: 'Rajitha T K',
+    role: 'Rehabilitation Specialist',
+    image:
+      '/team/rajitha.jpeg',
+    bio: '',
+    // socials: {
+    //   github: 'https://github.com/',
+    //   linkedin: 'https://www.linkedin.com/',
+    // },
+  },
 ]

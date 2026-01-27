@@ -14,10 +14,19 @@ import { usePathname } from 'next/navigation'
 gsap.registerPlugin(ScrollToPlugin)
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const tlRef = useRef<gsap.core.Timeline | null>(null)
   const pathname = usePathname()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const toggleMenu = () => {
     setIsOpen(prev => {
@@ -143,34 +152,55 @@ export default function Navbar() {
   }, [scrollToHash])
 
   return (
-    <nav className="bg-transparent fixed top-0 left-0 right-0 w-full px-4 py-6 md:py-8 z-50">
-      <div className="bg-[#ffffff] shadow-lg max-w-6xl rounded-lg py-1 mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Option 1: Using Tailwind classes */}
-        <div className="flex justify-between items-center text-black/90 h-14 md:h-16">
+    <nav 
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'py-3 bg-white/80 backdrop-blur-md shadow-sm border-b border-black/5' 
+          : 'py-5 bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-14 md:h-16">
           {/* Logo */}
           <div className="shrink">
-            <Link href="/" className="text-md  md:text-xl flex items-center space-x-2 font-normal" onClick={(e) => handleNavClick(e)}>
-              <Image
-                width={50}
-                height={50}
-                alt="Logo"
-                src="/logo.png"
-              />
-              {/* Option 2: Using imported font className */}
-              <span className='font-semibold raleway text-[#016b70] uppercase font-mont tracking-wider'>behavior space</span>
+            <Link 
+              href="/" 
+              className="group flex items-center space-x-2" 
+              onClick={(e) => handleNavClick(e)}
+            >
+              <div className="relative w-14 h-14 md:w-12 md:h-12 flex items-center justify-center transition-shadow">
+                <Image
+                  width={40}
+                  height={40}
+                  alt="Logo"
+                  src="/logo.png"
+                  className="object-contain"
+                />
+              </div>
+              <span className={`text-lg md:text-xl font-semibold tracking-tight uppercase font-mont transition-colors ${
+                isScrolled ? 'text-[#016b70]' : 'text-white drop-shadow-sm'
+              }`}>
+                Behaviour<span className={isScrolled ? 'text-[#028b92]' : 'text-white/90'}>Space</span>
+              </span>
             </Link>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-8 text-lg font-medium text-black/70">
-            <Link href="/" onClick={(e) => handleNavClick(e)}>Home</Link>
-            <Link href="/#about" onClick={(e) => handleNavClick(e, 'about')}>About</Link>
-            <Link href="/#therapists" onClick={(e) => handleNavClick(e, 'therapists')}>Therapists</Link>
-            <Link href="/#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</Link>
+          <div className={`hidden lg:flex items-center space-x-10 text-lg font-medium transition-colors ${
+            isScrolled ? 'text-black/70' : 'text-white'
+          }`}>
+            <Link href="/" className="hover:text-[#016b70] transition-colors" onClick={(e) => handleNavClick(e)}>Home</Link>
+            <Link href="/#about" className="hover:text-[#016b70] transition-colors" onClick={(e) => handleNavClick(e, 'about')}>About</Link>
+            <Link href="/#therapists" className="hover:text-[#016b70] transition-colors" onClick={(e) => handleNavClick(e, 'therapists')}>Therapists</Link>
+            <Link href="/#contact" className="hover:text-[#016b70] transition-colors" onClick={(e) => handleNavClick(e, 'contact')}>Contact</Link>
             <Link
               href="/booking"
               onClick={closeMenu}
-              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-[#016b70] text-white hover:bg-[#01595c] transition-colors"
+              className={`inline-flex items-center justify-center px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 active:scale-95 ${
+                isScrolled 
+                  ? 'bg-[#016b70] text-white hover:bg-[#01595c] shadow-md hover:shadow-lg' 
+                  : 'bg-white text-[#016b70] hover:bg-white/90 shadow-lg'
+              }`}
             >
               Book Now
             </Link>
@@ -183,33 +213,37 @@ export default function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              className="inline-flex items-center justify-center p-2 border-black/10 hover:bg-black/5 transition"
+              className={`inline-flex items-center justify-center p-2 rounded-xl transition-colors ${
+                isScrolled 
+                  ? 'text-black/80' 
+                  : 'text-white'
+              }`}
             >
               {isOpen ? (
-                <AiOutlineClose className="h-6 w-6 text-black/80" aria-hidden="true" />
+                <AiOutlineClose className="h-6 w-6" aria-hidden="true" />
               ) : (
-                <RxHamburgerMenu className="h-6 w-6 text-black/80" aria-hidden="true" />
+                <RxHamburgerMenu className="h-6 w-6" aria-hidden="true" />
               )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Panel (GSAP controls height + opacity + stagger) */}
+        {/* Mobile Menu Panel */}
         <div
           id="mobile-menu"
           ref={menuRef}
           className="lg:hidden overflow-hidden"
         >
-          <div className="py-4 border-t border-black/10">
-            <div className="flex flex-col space-y-3 text-lg font-medium text-black/80">
-              <Link href="/" className="px-2 py-2 rounded-md hover:bg-black/5" onClick={(e) => handleNavClick(e)}>Home</Link>
-              <Link href="/#about" className="px-2 py-2 rounded-md hover:bg-black/5" onClick={(e) => handleNavClick(e, 'about')}>About</Link>
-              <Link href="/#therapists" className="px-2 py-2 rounded-md hover:bg-black/5" onClick={(e) => handleNavClick(e, 'therapists')}>Therapists</Link>
-              <Link href="/#contact" className="px-2 py-2 rounded-md hover:bg-black/5" onClick={(e) => handleNavClick(e, 'contact')}>Contact</Link>
+          <div className={`mt-4 rounded-2xl p-4 shadow-xl border border-black/5 bg-white`}>
+            <div className="flex flex-col space-y-2">
+              <Link href="/" className="px-4 py-3 rounded-xl hover:bg-black/5 font-medium text-black/80 transition-colors" onClick={(e) => handleNavClick(e)}>Home</Link>
+              <Link href="/#about" className="px-4 py-3 rounded-xl hover:bg-black/5 font-medium text-black/80 transition-colors" onClick={(e) => handleNavClick(e, 'about')}>About</Link>
+              <Link href="/#therapists" className="px-4 py-3 rounded-xl hover:bg-black/5 font-medium text-black/80 transition-colors" onClick={(e) => handleNavClick(e, 'therapists')}>Therapists</Link>
+              <Link href="/#contact" className="px-4 py-3 rounded-xl hover:bg-black/5 font-medium text-black/80 transition-colors" onClick={(e) => handleNavClick(e, 'contact')}>Contact</Link>
               <Link
                 href="/booking"
                 onClick={closeMenu}
-                className="mt-2 inline-flex items-center justify-center px-4 py-2 rounded-full bg-[#016b70] text-white hover:bg-[#01595c] transition-colors"
+                className="mt-4 inline-flex items-center justify-center px-4 py-3 rounded-xl bg-[#016b70] text-white font-medium hover:bg-[#01595c] transition-colors"
               >
                 Book Now
               </Link>

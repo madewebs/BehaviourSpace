@@ -32,8 +32,8 @@ export default function Team() {
     if (animate) {
       gsap.to(container, {
         scrollLeft: target,
-        duration: 0.6,
-        ease: 'power3.out',
+        duration: 1.2,
+        ease: 'power4.inOut',
       })
     } else {
       container.scrollLeft = target
@@ -42,12 +42,12 @@ export default function Team() {
   }
 
   const goNext = () => {
-    const next = clamp(current + 1, 0, team.length - 1)
+    const next = (current + 1) % team.length
     centerCard(next)
     restartAutoplay()
   }
   const goPrev = () => {
-    const prev = clamp(current - 1, 0, team.length - 1)
+    const prev = (current - 1 + team.length) % team.length
     centerCard(prev)
     restartAutoplay()
   }
@@ -128,22 +128,16 @@ export default function Team() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const atStart = current <= 0
-  const atEnd = current >= team.length - 1
-
   return (
     <section className="w-full py-4 md:py-8">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-4 flex items-center justify-between gap-2">
           <h2 className=" text-3xl md:text-4xl text-[#00494b] mb-2 font-medium">Meet Our Team</h2>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               aria-label="Previous"
               onClick={goPrev}
-              className={`inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm transition
-              ${atStart ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}
-              border-gray-200 bg-white text-black`}
-              disabled={atStart}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-black hover:bg-[#016b70] hover:text-white transition-all active:scale-95 shadow-sm"
               type="button"
             >
               ‹
@@ -151,10 +145,7 @@ export default function Team() {
             <button
               aria-label="Next"
               onClick={goNext}
-              className={`inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm transition
-              ${atEnd ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}
-              border-gray-200 bg-white text-black`}
-              disabled={atEnd}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-black hover:bg-[#016b70] hover:text-white transition-all active:scale-95 shadow-sm"
               type="button"
             >
               ›
@@ -164,7 +155,7 @@ export default function Team() {
 
         <div
           ref={trackRef}
-          className="no-scrollbar flex gap-4 md:gap-6 overflow-x-auto pb-2 snap-x snap-mandatory"
+          className="no-scrollbar flex gap-4 md:gap-10 overflow-x-auto pb-10"
           onMouseEnter={() => {
             isPausedRef.current = true
             stopAutoplay()
@@ -184,9 +175,9 @@ export default function Team() {
                 centerCard(i)
                 restartAutoplay()
               }}
-              className="team-card relative snap-start shrink-0 w-[85vw] max-w-104 sm:w-104 md:w-104 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md"
+              className="team-card relative shrink-0 w-72 sm:w-80 md:w-[380px] overflow-hidden rounded-2xl border border-black/5 bg-white shadow-md transition-shadow duration-300 hover:shadow-xl"
             >
-              <div className="relative h-80 sm:h-88 md:h-96 w-full">
+              <div className="relative h-[400px] md:h-[480px] w-full">
                 <Image
                   src={m.image}
                   alt={m.name}
