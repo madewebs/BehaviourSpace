@@ -28,6 +28,13 @@ export default function Page() {
   useLayoutEffect(() => {
     if (isLoading || !contentRef.current) return;
 
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
+
     const ctx = gsap.context(() => {
       gsap.set("[data-animate='section']", { opacity: 0, y: 40 });
       gsap.set("[data-animate='footer']", { opacity: 0, y: 30 });
