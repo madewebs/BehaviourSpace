@@ -76,15 +76,15 @@ export default function About() {
           </div>
         </div>
         {/* Image Section */}
-<div className="relative flex-1 rounded-sm overflow-hidden">
-  <Image
-    src="/aboutimg.webp"
-    alt="Behavior Space Clinic"
-    width={1200}
-    height={800}
-    className="object-cover w-full"
-  />
-</div>
+          <div className="relative flex-1 rounded-sm overflow-hidden min-h-[600px]">
+            <Image
+              src="/aboutimg.webp"
+              alt="Behavior Space Clinic"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+      </div>
       </div>
 
       {/* Child Support Callout (auto height, centered text, bg image, no min-height) */}
