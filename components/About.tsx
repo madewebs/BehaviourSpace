@@ -55,7 +55,7 @@ export default function About() {
             — we help you break free from overthinking, panic, and emotional burnout.
           </p>
 
-          <div className='flex gap-8 mt-5 md:mt-6 flex-row font-medium'>
+          <div className='flex gap-2 md:gap-8 mt-5 md:mt-6 flex-row font-medium'>
             {/* Go to /bookings */}
             <button
               type="button"
@@ -76,15 +76,15 @@ export default function About() {
           </div>
         </div>
         {/* Image Section */}
-          <div className="relative flex-1 rounded-sm overflow-hidden min-h-[600px]">
-            <Image
-              src="/aboutimg.webp"
-              alt="Behavior Space Clinic"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-      </div>
+        <div className="relative flex-1 rounded-sm overflow-hidden min-h-[600px]">
+          <Image
+            src="/aboutimg.webp"
+            alt="Behavior Space Clinic"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
       </div>
 
       {/* Child Support Callout (auto height, centered text, bg image, no min-height) */}
