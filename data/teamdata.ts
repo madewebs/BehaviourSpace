@@ -51,7 +51,7 @@ export const team: TeamMember[] = [
   {
     id: '4',
     name: 'Rajitha T K',
-    role: 'Rehabilitation Specialist',
+    role: 'Rehabilitation Psychologist',
     image:
       '/team/rajitha.jpeg',
     bio: '',

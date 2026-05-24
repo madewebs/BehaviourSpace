@@ -19,8 +19,8 @@ export default function About() {
   const scrollToContact = () => {
     // If on home and #contact exists, animate; else navigate to /#contact
     const contactEl = document.getElementById('contact')
-    if (typeof window !== 'undefined' && window.location.pathname === '/' && contactEl) {
-      gsap.to(window, {
+    if (typeof globalThis !== 'undefined' && globalThis.location.pathname === '/' && contactEl) {
+      gsap.to(globalThis, {
         duration: 0.8,
         ease: 'power2.out',
         scrollTo: { y: contactEl, offsetY: getOffsetY() }
@@ -76,15 +76,15 @@ export default function About() {
           </div>
         </div>
         {/* Image Section */}
-        <div className="relative flex-1 rounded-sm overflow-hidden min-h-[600px]">
-          <Image
-            src="/aboutimg.webp"
-            alt="Behavior Space Clinic"
-            fill
-            className="object-cover"
-            sizes='100vw'
-          />
-        </div>
+<div className="relative flex-1 rounded-sm overflow-hidden">
+  <Image
+    src="/aboutimg.webp"
+    alt="Behavior Space Clinic"
+    width={1200}
+    height={800}
+    className="object-cover w-full"
+  />
+</div>
       </div>
 
       {/* Child Support Callout (auto height, centered text, bg image, no min-height) */}

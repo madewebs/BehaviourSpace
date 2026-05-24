@@ -32,8 +32,8 @@ export default function Team() {
     if (animate) {
       gsap.to(container, {
         scrollLeft: target,
-        duration: 1.2,
-        ease: 'power4.inOut',
+        duration: 1,
+        ease: 'power2.inOut',
       })
     } else {
       container.scrollLeft = target

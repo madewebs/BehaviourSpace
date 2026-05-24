@@ -85,6 +85,18 @@ export default function Footer() {
                 </p>
               </div>
 
+              <div>
+                <p className="font-semibold text-gray-300 mb-1">
+                  India
+                </p>
+                <p className="leading-relaxed">
+                  PARC Rehabilation centre<br />
+                  Mannur valavu<br />
+                  Kadalundi Road<br />
+                  Kozhikode, Kerala – 673008
+                </p>
+              </div>
+
             </div>
           </div>
 
