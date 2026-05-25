@@ -46,13 +46,7 @@ export default function About() {
           </p>
 
           <p className='mt-4 md:mt-5 text-md md:text-xl leading-relaxed'>
-            Find calm, clarity, and control with evidence-based behavioral therapy.
-            Through the{' '}
-            <span className='font-medium'>A.B.T. Reset Framework</span> —{' '}
-            <span className='font-medium'>
-              Awareness • Behavioral Shift • Thought Repatterning
-            </span>{' '}
-            — we help you break free from overthinking, panic, and emotional burnout.
+            We help you feel calmer and more confident with simple, practical therapy.
           </p>
 
           <div className='flex gap-2 md:gap-8 mt-5 md:mt-6 flex-row font-medium'>
@@ -76,10 +70,10 @@ export default function About() {
           </div>
         </div>
         {/* Image Section */}
-        <div className="relative flex-1 rounded-sm overflow-hidden min-h-[600px]">
+        <div className="relative flex-1 rounded-sm overflow-hidden min-h-150">
           <Image
-            src="/aboutimg.webp"
-            alt="Behavior Space Clinic"
+            src="/child-behavioral-therapy-clinic-bangalore.webp"
+            alt="Child being supported through behavioral therapy at Behavior Space Clinic"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -91,7 +85,7 @@ export default function About() {
       <div
         className="relative w-full mt-6 md:mt-8 bg-linear-0 bg-amber-700"
         style={{
-          backgroundImage: "url('/abt.webp')",
+          backgroundImage: "url('/autism-adhd-therapy-bangalore.webp')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -103,10 +97,7 @@ export default function About() {
 
         <div className="relative max-w-full mx-auto md:max-w-7xl py-12 md:py-14 text-center inter text-white px-4">
           <p className="text-md md:text-xl">
-            We also provide specialized support for behavioral problems and learning disabilities in children, including ADHD, ASD, ODD, and academic or developmental challenges. Our child-focused behavioral interventions help improve self-regulation, attention, emotional functioning, and learning skills.
-          </p>
-          <p className="mt-2 font-medium italic text-md md:text-xl">
-            Start your journey toward a stable, anxiety-free mind — for you and your child.
+            Specialized support for children with ADHD, ASD, ODD, and learning challenges, designed to improve focus and emotional balance.
           </p>
         </div>
       </div>

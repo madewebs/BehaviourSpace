@@ -11,7 +11,7 @@ export default function Services() {
             Our Services
           </h1>
           <p className="text-md md:text-xl text-[#00412b] max-w-3xl mx-auto leading-relaxed">
-            We offer compassionate, evidence-based psychological care for children, adolescents, adults, and families.
+            Simple, effective care for anxiety, behavior, learning support, and family wellbeing.
           </p>
         </div>
 
@@ -21,7 +21,7 @@ export default function Services() {
           <div className="bg-white p-6 md:p-8 rounded-sm border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-xl font-medium text-[#016b70] mb-3">Counseling Services</h3>
             <p className="text-[#00412b] leading-relaxed">
-              Individual, child, family, marital & premarital counseling
+              Support for individuals, couples, families, and parents to improve communication and reduce stress.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ export default function Services() {
           <div className="bg-white p-6 md:p-8 rounded-sm border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-xl font-medium text-[#016b70] mb-3">Psychological Therapies</h3>
             <p className="text-[#00412b] leading-relaxed">
-              CBT, DBT, ABA, Behavior Therapy, Play Therapy, Trauma-Focused & Mindfulness-Based Therapies
+              Practical therapy methods to ease anxiety, manage stress, and build stronger coping skills.
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export default function Services() {
           <div className="bg-white p-6 md:p-8 rounded-sm border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-xl font-medium text-[#016b70] mb-3">Child Development & Special Needs</h3>
             <p className="text-[#00412b] leading-relaxed">
-              ASD, ADHD, Learning Disability support, early intervention & parent training
+              Support for children with ADHD, ASD, and learning challenges to help them feel more calm, focused, and confident.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function Services() {
           <div className="bg-white p-6 md:p-8 rounded-sm border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-xl font-medium text-[#016b70] mb-3">Psychological Assessments</h3>
             <p className="text-[#00412b] leading-relaxed">
-              Developmental, behavioral, emotional & learning screenings
+              Simple evaluations to identify what support you or your child need most.
             </p>
           </div>
 
@@ -53,7 +53,7 @@ export default function Services() {
           <div className="bg-white p-6 md:p-8 rounded-sm border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-xl font-medium text-[#016b70] mb-3">Internship & Professional Training</h3>
             <p className="text-[#00412b] leading-relaxed">
-              Psychology internships, supervised clinical training & workshops
+              Practical training programs for students and professionals who want real-world clinical experience.
             </p>
           </div>
 
@@ -61,7 +61,7 @@ export default function Services() {
           <div className="bg-white p-6 md:p-8 rounded-sm border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             <h3 className="text-xl font-medium text-[#016b70] mb-3">Courses & Certification Programs</h3>
             <p className="text-[#00412b] leading-relaxed">
-              Counseling & psychotherapy courses, ABA training & skill-based programs
+              Short courses and certifications to build new skills in counseling, ABA, and mental health care.
             </p>
           </div>
         </div>

@@ -174,7 +174,7 @@ export default function Navbar() {
                 <Image
                   width={40}
                   height={40}
-                  alt="Logo"
+                  alt="Behavior Space Clinic Logo"
                   src="/logo.png"
                   className="object-contain"
                 />
