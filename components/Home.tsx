@@ -17,9 +17,9 @@ export default function Home() {
       <div className="relative z-10 mx-auto px-4 md:px-20 text-left">
         <div className="relative inline-block">
           <h1 className="mont text-base md:text-lg font-semibold text-white absolute -top-7 left-0">
-             Mental Health Clinic
+             Behavioral Health Clinic in Kozhikode
           </h1>
-          <h2 className="mont text-4xl md:text-6xl font-semibold text-white pt-7">
+          <h2 className="mont text-4xl md:text-6xl font-semibold text-white pt-1">
             Here to support your healing.
           </h2>
         </div>

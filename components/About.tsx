@@ -37,9 +37,9 @@ export default function About() {
 
         {/* Content Section */}
         <div className='flex-1 inter text-[#00412b]'>
-          <p className='text-3xl md:text-5xl mb-2 md:mb-8 leading-10 md:leading-14 '>
+          <h2 className='text-3xl md:text-5xl mb-2 md:mb-8 leading-10 md:leading-14 '>
             Welcome to Behavior Space Clinic
-          </p>
+          </h2>
 
           <p className='mb-4 md:mb-5 font-normal italic text-xl md:text-3xl'>
             Reset Anxiety. Rebuild Balance. Reclaim You.
@@ -60,13 +60,16 @@ export default function About() {
             </button>
 
             {/* GSAP scroll to #contact */}
-            <button
-              type="button"
-              onClick={scrollToContact}
-              className='bg-white text-[#016b70] px-4 md:px-6 py-3 rounded-sm border border-[#016b70] shadow-md hover:bg-[#016b70] hover:text-white hover:border-[#016b70] transition hover:scale-107 duration-400'
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToContact();
+              }}
+              className='bg-white text-[#016b70] px-4 md:px-6 py-3 rounded-sm border border-[#016b70] shadow-md hover:bg-[#016b70] hover:text-white hover:border-[#016b70] transition hover:scale-107 duration-400 inline-block text-center'
             >
               For Enquiry
-            </button>
+            </a>
           </div>
         </div>
         {/* Image Section */}

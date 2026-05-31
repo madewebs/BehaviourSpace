@@ -7,9 +7,9 @@ export default function Services() {
         
         {/* Header */}
         <div className="text-center mb-8 md:mb-10 ">
-          <h1 className="text-3xl md:text-4xl mb-2 text-[#00412b] leading-tight font-medium">
+          <h2 className="text-3xl md:text-4xl mb-2 text-[#00412b] leading-tight font-medium">
             Our Services
-          </h1>
+          </h2>
           <p className="text-md md:text-xl text-[#00412b] max-w-3xl mx-auto leading-relaxed">
             Simple, effective care for anxiety, behavior, learning support, and family wellbeing.
           </p>

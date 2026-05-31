@@ -3,7 +3,7 @@ import { exo, interTight, eduHand, montserrat, raleway, manrope, quicksand } fro
 import "./globals.css";
 
 const seoKeywords = [
-  "#1 Mental Health Clinic",
+  "#1 Behavioral Health Clinic",
   "behavior space clinic bangalore",
   "behavior space clinic kerala",
   "behavior space clinic kozhikode",
@@ -23,13 +23,30 @@ const seoKeywords = [
   "learning disabilities support near me",
   "evidence-based behavioral therapy",
   "therapy for children and adults",
-  
+  "Autism spectrum disorder (ASD) therapy",
+  "Autism clinic",
+  "ADHD assessment",
+  "ADHD behavior therapy",
+  "Child behavioral therapy",
+  "Oppositional Defiant Disorder (ODD) treatment",
+  "Sensory processing disorder clinic",
+  "Anger management for children/teens",
+  "ABA therapy (Applied Behavior Analysis)",
+  "Cognitive Behavioral Therapy (CBT) for behavior",
+  "Speech and occupational therapy",
+  "Behavioral psychologist near me",
+  "Board Certified Behavior Analyst (BCBA)",
+  "Pediatric behavioral counselor",
+  "Behavior clinic in Kozhikode",
+  "Autism center near me",
+  "Child behavior clinic Kozhikode",
+  "In-home behavioral therapy"
 ];
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.behaviorspace.co"),
   title: {
-    default: "Behavior Space Clinic",
+    default: "Leading Behavioral Health Clinic in Kozhikode | Behavior Space Clinic",
     template: "%s | Behavior Space Clinic",
   },
   description:
@@ -99,13 +116,15 @@ export default function RootLayout({
                   url: 'https://www.behaviorspace.co/',
                 },
                 {
-                  '@type': 'LocalBusiness',
+                  '@type': 'MedicalClinic',
                   name: 'Behavior Space Clinic',
                   url: 'https://www.behaviorspace.co/',
                   telephone: '+917907961350',
                   priceRange: '₹₹',
                   address: {
                     '@type': 'PostalAddress',
+                    addressLocality: 'Kozhikode',
+                    addressRegion: 'Kerala',
                     addressCountry: 'IN',
                   },
                   aggregateRating: {
