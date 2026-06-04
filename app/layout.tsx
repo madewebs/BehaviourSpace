@@ -40,7 +40,18 @@ const seoKeywords = [
   "Behavior clinic in Kozhikode",
   "Autism center near me",
   "Child behavior clinic Kozhikode",
-  "In-home behavioral therapy"
+  "In-home behavioral therapy",
+  "online behavioral therapy",
+  "online psychologist consultation",
+  "online therapy sessions",
+  "teletherapy for anxiety",
+  "online child behavior therapist",
+  "virtual psychologist",
+  "online counseling for burnout",
+  "remote behavioral therapy",
+  "telehealth behavior clinic",
+  "online psychological assessment",
+  "online ABA therapy"
 ];
 
 export const metadata: Metadata = {
@@ -134,6 +145,9 @@ export default function RootLayout({
                     bestRating: '5',
                     worstRating: '1',
                   },
+                  sameAs: [
+                    'https://share.google/JvipD4bkmhuhzhsU3'
+                  ]
                 },
               ],
             }),
