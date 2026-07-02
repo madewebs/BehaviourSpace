@@ -123,8 +123,9 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  // Close on route change without triggering cascading renders
+  // Close on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     closeMenu()
   }, [closeMenu, pathname])
 
@@ -176,6 +177,8 @@ export default function Navbar() {
                   height={40}
                   alt="Behavior Space Clinic Logo"
                   src="/logo.png"
+                  draggable={false}
+                  data-logo
                   className="object-contain"
                 />
               </div>

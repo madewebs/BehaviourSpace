@@ -11,6 +11,7 @@ export default function Home() {
         alt="Behavior Space Clinic - Providing evidence-based behavioral therapy and mental health support"
         fill
         priority
+        draggable={false}
         className="object-cover brightness-90"
       />
 

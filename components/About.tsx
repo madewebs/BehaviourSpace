@@ -78,6 +78,7 @@ export default function About() {
             src="/child-behavioral-therapy-clinic-bangalore.webp"
             alt="Child being supported through behavioral therapy at Behavior Space Clinic"
             fill
+            draggable={false}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
           />

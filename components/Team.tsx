@@ -8,11 +8,14 @@ export default function Team() {
   const trackRef = useRef<HTMLDivElement | null>(null)
   const cardsRef = useRef<HTMLElement[]>([])
   const [current, setCurrent] = useState(0)
+  const isScrollingRef = useRef(false)
 
   // Autoplay helpers
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isPausedRef = useRef(false)
   const currentRef = useRef(0)
+  const accumulatedDeltaRef = useRef(0)
+  const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n))
 
@@ -34,11 +37,81 @@ export default function Team() {
         scrollLeft: target,
         duration: 1,
         ease: 'power2.inOut',
+        onStart: () => { isScrollingRef.current = true },
+        onComplete: () => { isScrollingRef.current = false },
       })
     } else {
       container.scrollLeft = target
     }
     setCurrent(index)
+  }
+
+  const animateScroll = (delta: number) => {
+    const container = trackRef.current
+    if (!container || isScrollingRef.current) return
+    isScrollingRef.current = true
+    const target = clamp(
+      container.scrollLeft + delta,
+      0,
+      container.scrollWidth - container.clientWidth
+    )
+    gsap.to(container, {
+      scrollLeft: target,
+      duration: 0.6,
+      ease: 'power2.out',
+      onComplete: () => { isScrollingRef.current = false },
+    })
+  }
+
+  const handleWheel = (e: WheelEvent) => {
+    e.preventDefault()
+    if (isScrollingRef.current) return
+    accumulatedDeltaRef.current += e.deltaX || e.deltaY
+    if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current)
+    wheelTimeoutRef.current = setTimeout(() => {
+      if (Math.abs(accumulatedDeltaRef.current) > 20) {
+        animateScroll(accumulatedDeltaRef.current > 0 ? 300 : -300)
+      }
+      accumulatedDeltaRef.current = 0
+    }, 40)
+  }
+
+  // Touch drag
+  const touchStartRef = useRef(0)
+  const touchScrollRef = useRef(0)
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartRef.current = e.touches[0].clientX
+    touchScrollRef.current = trackRef.current?.scrollLeft ?? 0
+  }
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (isScrollingRef.current) return
+    const dx = touchStartRef.current - e.touches[0].clientX
+    if (Math.abs(dx) > 10) {
+      e.preventDefault()
+      animateScroll(dx * 1.5)
+      touchStartRef.current = e.touches[0].clientX
+    }
+  }
+
+  // Autoplay: advance every 3.5s, loop, pause on hover and tab hidden
+  const startAutoplay = () => {
+    if (autoplayRef.current) return
+    autoplayRef.current = setInterval(() => {
+      const next = (currentRef.current + 1) % team.length
+      centerCard(next)
+    }, 3500)
+  }
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current)
+      autoplayRef.current = null
+    }
+  }
+  const restartAutoplay = () => {
+    stopAutoplay()
+    if (!isPausedRef.current) startAutoplay()
   }
 
   const goNext = () => {
@@ -67,12 +140,26 @@ export default function Team() {
     return () => ctx.revert()
   }, [])
 
-  // Center first card on mount and on resize
+  // Center first card on mount, on resize, smooth wheel/touch scrolling
   useEffect(() => {
+    const el = trackRef.current
+    if (!el) return
+
     centerCard(0, false)
+
     const onResize = () => centerCard(currentRef.current, false)
     window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    el.addEventListener('touchstart', handleTouchStart, { passive: true })
+    el.addEventListener('touchmove', handleTouchMove, { passive: false })
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      el.removeEventListener('wheel', handleWheel)
+      el.removeEventListener('touchstart', handleTouchStart)
+      el.removeEventListener('touchmove', handleTouchMove)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -91,25 +178,6 @@ export default function Team() {
     return () => window.removeEventListener('keydown', onKey)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current])
-
-  // Autoplay: advance every 3.5s, loop, pause on hover and tab hidden
-  const startAutoplay = () => {
-    if (autoplayRef.current) return
-    autoplayRef.current = setInterval(() => {
-      const next = (currentRef.current + 1) % team.length
-      centerCard(next)
-    }, 3500)
-  }
-  const stopAutoplay = () => {
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current)
-      autoplayRef.current = null
-    }
-  }
-  const restartAutoplay = () => {
-    stopAutoplay()
-    if (!isPausedRef.current) startAutoplay()
-  }
 
   useEffect(() => {
     startAutoplay()
@@ -155,7 +223,7 @@ export default function Team() {
 
         <div
           ref={trackRef}
-          className="no-scrollbar flex gap-4 md:gap-10 overflow-x-auto pb-10"
+          className="flex gap-4 md:gap-10 overflow-x-hidden pb-10"
           onMouseEnter={() => {
             isPausedRef.current = true
             stopAutoplay()
@@ -246,16 +314,6 @@ export default function Team() {
           ))}
         </div>
 
-        {/* Hide scrollbar (WebKit, Firefox, old Edge) */}
-        <style jsx>{`
-          .no-scrollbar::-webkit-scrollbar {
-            display: none;
-          }
-          .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-        `}</style>
       </div>
     </section>
   )

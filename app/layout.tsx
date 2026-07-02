@@ -154,7 +154,15 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${quicksand.className} antialiased`}>{children}</body>
+      <body className={`${quicksand.className} antialiased`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.addEventListener('contextmenu',function(e){if(e.target.tagName==='IMG')e.preventDefault()});document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault()});",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
